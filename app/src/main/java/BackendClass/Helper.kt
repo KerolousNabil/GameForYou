@@ -36,7 +36,7 @@ class Helper {
     lateinit var adapterforplatform:PlatformAdapter
 
     fun Init ( recyclerView: RecyclerView,adaper: Any , mycontext:Context){
-        this.mycontext = mycontext
+     this.mycontext = mycontext
     this.recyclerView = recyclerView
     this.adaper= adaper
 
@@ -139,7 +139,6 @@ class Helper {
                           )
 
                           gamelist.add(game)
-                          //   templist.add(game)
 
 
                       } catch (e: JSONException) {

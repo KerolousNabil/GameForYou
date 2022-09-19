@@ -29,7 +29,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_marginLeft="10dp"
+                android:textAlignment="center"
                 android:layout_marginTop="20dp"
                 android:text="Name of game"
                 android:textStyle="bold"
@@ -57,6 +57,152 @@
                 android:text="rating"
                 android:textColor="@color/teal_200"
                 android:textSize="20dp" />
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:layout_marginLeft="10dp"
+                android:textSize="20dp"
+                android:text="Description" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                app:cardBackgroundColor="@color/white"
+                android:layout_marginTop="10dp"
+                app:cardCornerRadius="20dp"
+                android:layout_height="wrap_content">
+
+
+
+                <TextView
+                    android:id="@+id/d_decription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="description"
+                    android:textSize="18dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.04"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/d_platform" />
+            </androidx.cardview.widget.CardView>
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:layout_marginLeft="10dp"
+                android:textSize="20dp"
+                android:text="Link" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                app:cardBackgroundColor="@color/white"
+                android:layout_marginTop="10dp"
+                app:cardCornerRadius="20dp"
+                android:layout_height="wrap_content">
+
+
+
+                <TextView
+                    android:id="@+id/d_link"
+                    android:autoLink="web"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Link"
+                    android:textSize="18dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.04"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/d_platform" />
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:layout_marginLeft="10dp"
+                android:textSize="20dp"
+                android:text="Minimum requirments" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                app:cardBackgroundColor="@color/white"
+                android:layout_marginTop="10dp"
+                app:cardCornerRadius="20dp"
+                android:layout_height="wrap_content">
+
+
+
+                <TextView
+                    android:id="@+id/d_min"
+                    android:autoLink="web"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="min"
+                    android:textSize="18dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.04"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/d_platform" />
+            </androidx.cardview.widget.CardView>
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:layout_marginLeft="10dp"
+                android:textSize="20dp"
+                android:text="recomended requirments" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                app:cardBackgroundColor="@color/white"
+                android:layout_marginTop="10dp"
+                app:cardCornerRadius="20dp"
+                android:layout_height="wrap_content">
+
+
+
+                <TextView
+                    android:id="@+id/d_rec"
+                    android:autoLink="web"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="min"
+                    android:textSize="18dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.04"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/d_platform" />
+            </androidx.cardview.widget.CardView>
+
+
 
             <TextView
                 android:id="@+id/textView3"

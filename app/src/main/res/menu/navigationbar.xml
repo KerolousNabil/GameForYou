@@ -10,7 +10,7 @@
         android:title="Home" />
     <item
         android:id="@+id/orderbyrating"
-        android:icon="@drawable/home"
+        android:icon="@drawable/cup"
         android:title="Order by rating" />
     <item
         android:id="@+id/platform"

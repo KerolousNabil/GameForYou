@@ -21,6 +21,7 @@ import com.example.my.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import org.json.JSONObject
 import kotlin.collections.ArrayList
 
 class GamesAdapter (var mycontext : Context, private var userList : ArrayList<Games>) : RecyclerView.Adapter<GamesAdapter.MyViewHolder>(){
@@ -48,8 +49,40 @@ class GamesAdapter (var mycontext : Context, private var userList : ArrayList<Ga
 
           val intent = Intent(mycontext, DetailGames::class.java)
           val bundle = Bundle()
+           var reruirments =JSONObject()
 
-          bundle.putString("name",res.getString("description").replace("<.*?>".toRegex(RegexOption.DOT_MATCHES_ALL), ""))
+              var x = res.getJSONArray("platforms")
+              for (loop_pc in 0 until x.length())
+              {
+                  val platorm = x.getJSONObject(loop_pc).getJSONObject("platform")
+                    if (platorm.getString("slug") =="pc")
+                    {
+                        reruirments = x.getJSONObject(loop_pc).getJSONObject("requirements")
+                    }
+
+              }
+          bundle.putString("desc" ,res.getString("description").replace("<.*?>".toRegex(RegexOption.DOT_MATCHES_ALL), "") )
+
+              var min:String;
+              var rec:String = "sorry there is no record"
+
+              min=rec
+
+
+          if(reruirments.has("recommended"))
+          {
+              rec = reruirments.getString("recommended")
+
+          }
+            if(reruirments.has("minimum")){
+                min = reruirments.getString("minimum")
+
+          }
+
+              bundle.putString("min" , min)
+              bundle.putString("rec" , rec)
+          bundle.putString("name",game.name)
+          bundle.putString("link",res.getString("website"))
           bundle.putDouble("rating", game.rating)
           bundle.putString("genres", game.genres)
           bundle.putString("poster", game.poster)
@@ -63,7 +96,7 @@ class GamesAdapter (var mycontext : Context, private var userList : ArrayList<Ga
           intent.putExtras(bundle)
           mycontext.startActivity(intent)
 
-      }
+       }
 
 
        })

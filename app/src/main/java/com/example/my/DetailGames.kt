@@ -2,6 +2,7 @@ package com.example.my
 
 import Controller.*
 import android.os.Bundle
+import android.text.method.LinkMovementMethod
 import android.util.Log
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -32,10 +33,10 @@ class DetailGames : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var commentdata: ArrayList<Comments>
     private lateinit var dbref : DatabaseReference
-
-
-
-
+    private lateinit var desc :TextView
+    private lateinit var link :TextView
+    private lateinit var min :TextView
+    private lateinit var rec :TextView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_games)
@@ -66,9 +67,12 @@ class DetailGames : AppCompatActivity() {
         savecomments = findViewById(R.id.comment_submet)
         person = findViewById(R.id.person_show)
         write_comment = findViewById(R.id.commenttext)
-
-
-
+        desc = findViewById(R.id.d_decription)
+        link = findViewById(R.id.d_link)
+        link.movementMethod = LinkMovementMethod.getInstance()
+        link.isClickable = true
+        min= findViewById(R.id.d_min)
+        rec = findViewById(R.id.d_rec)
 
         val bundle = intent.extras
         val poster = bundle!!.getString("poster")
@@ -79,6 +83,10 @@ class DetailGames : AppCompatActivity() {
         val platform =bundle.getString("platform")
         val tag =bundle.getString("tags")
         val id = bundle.getString("id")
+        val description = bundle.getString("desc")
+        val linkk = bundle.getString("link")
+       val minu = bundle.getString("min")
+        val reco = bundle.getString("rec")
         savecomments.setOnClickListener {
 
             if (name!!.isNotEmpty())
@@ -126,6 +134,11 @@ class DetailGames : AppCompatActivity() {
         {
             tags.text = "Sorry there is no record"
         }
+        desc.text = description
+        link.text = linkk
+        min.text = minu
+        rec.text = reco
+
 
 
         sliderAdapter = SliderAdapter( this@DetailGames,imageUrl)
