@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/koko/AndroidStudioProjects/My/app/src/main/res/drawable-v24/custom_button_background.xml" value="0.1255" />
+        <entry key="..\:/Users/koko/AndroidStudioProjects/My/app/src/main/res/drawable-v24/custombackground.xml" value="0.2095" />
+        <entry key="..\:/Users/koko/AndroidStudioProjects/My/app/src/main/res/drawable/blue_border_rounded_cornwe.xml" value="0.1695" />
+        <entry key="..\:/Users/koko/AndroidStudioProjects/My/app/src/main/res/drawable/custom.xml" value="0.197" />
+        <entry key="..\:/Users/koko/AndroidStudioProjects/My/app/src/main/res/drawable/custombackground.xml" value="0.2095" />
+        <entry key="..\:/Users/koko/AndroidStudioProjects/My/app/src/main/res/drawable/ic_baseline_turned_in_24.xml" value="0.17" />
+        <entry key="..\:/Users/koko/AndroidStudioProjects/My/app/src/main/res/drawable/ic_baseline_turned_in_not_24.xml" value="0.1055" />
+        <entry key="..\:/Users/koko/AndroidStudioProjects/My/app/src/main/res/drawable/ic_wave.xml" value="0.2095" />
+        <entry key="..\:/Users/koko/AndroidStudioProjects/My/app/src/main/res/layout/activity_detail_games.xml" value="0.25" />
+        <entry key="..\:/Users/koko/AndroidStudioProjects/My/app/src/main/res/layout/activity_login_screen.xml" value="0.22" />
+        <entry key="..\:/Users/koko/AndroidStudioProjects/My/app/src/main/res/layout/activity_main.xml" value="0.15806159420289856" />
+        <entry key="..\:/Users/koko/AndroidStudioProjects/My/app/src/main/res/layout/activity_myfavorite_menu.xml" value="0.19972826086956522" />
+        <entry key="..\:/Users/koko/AndroidStudioProjects/My/app/src/main/res/layout/activity_platform_menu.xml" value="0.19972826086956522" />
+        <entry key="..\:/Users/koko/AndroidStudioProjects/My/app/src/main/res/layout/activity_splash_screen.xml" value="0.18" />
+        <entry key="..\:/Users/koko/AndroidStudioProjects/My/app/src/main/res/layout/activity_tabedactivity.xml" value="0.19791666666666666" />
+        <entry key="..\:/Users/koko/AndroidStudioProjects/My/app/src/main/res/layout/content_main.xml" value="0.1643835616438356" />
+        <entry key="..\:/Users/koko/AndroidStudioProjects/My/app/src/main/res/layout/custom_comments.xml" value="0.33" />
+        <entry key="..\:/Users/koko/AndroidStudioProjects/My/app/src/main/res/layout/custom_myfavorite_photo.xml" value="0.33" />
+        <entry key="..\:/Users/koko/AndroidStudioProjects/My/app/src/main/res/layout/custom_photo.xml" value="0.17481884057971014" />
+        <entry key="..\:/Users/koko/AndroidStudioProjects/My/app/src/main/res/layout/custom_platform_photo.xml" value="0.33" />
+        <entry key="..\:/Users/koko/AndroidStudioProjects/My/app/src/main/res/layout/dialog_forgot_password.xml" value="0.19791666666666666" />
+        <entry key="..\:/Users/koko/AndroidStudioProjects/My/app/src/main/res/layout/drawer_header.xml" value="0.203125" />
+        <entry key="..\:/Users/koko/AndroidStudioProjects/My/app/src/main/res/layout/fragment_tabedactivity.xml" value="0.19791666666666666" />
+        <entry key="..\:/Users/koko/AndroidStudioProjects/My/app/src/main/res/layout/list_game.xml" value="0.33" />
+        <entry key="..\:/Users/koko/AndroidStudioProjects/My/app/src/main/res/menu/navigation_menu.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/koko/AndroidStudioProjects/My/app/src/main/res/menu/navigationbar.xml" value="0.19947916666666668" />
+        <entry key="..\:/Users/koko/AndroidStudioProjects/My/app/src/main/res/xml/custombackground.xml" value="0.19791666666666666" />
+      </map>
+    </option>
+  </component>
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK" />
+</project>

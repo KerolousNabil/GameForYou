@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "507797269861",
+    "project_id": "game-for-you-cf669",
+    "storage_bucket": "game-for-you-cf669.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:507797269861:android:ae3fe87d0c4c925b58c58c",
+        "android_client_info": {
+          "package_name": "com.example.my"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "507797269861-fg7634pl9vrbggb9dc6fkat84rk3bv0f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD9kl8cSpQvShzp5D363C4RxBoKvHLJDlc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "507797269861-fg7634pl9vrbggb9dc6fkat84rk3bv0f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

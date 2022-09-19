@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+
+    <item
+        android:id="@+id/home"
+        android:icon="@drawable/home"
+        android:title="Home" />
+    <item
+        android:id="@+id/orderbyrating"
+        android:icon="@drawable/home"
+        android:title="Order by rating" />
+    <item
+        android:id="@+id/platform"
+        android:icon="@drawable/platform"
+        android:title="Platforms" />
+
+    <item android:title="Favorite">
+
+        <menu>
+            <item
+                android:id="@+id/myfavorit"
+                android:title="My favorite"
+                android:icon="@drawable/favorite"/>
+
+        </menu>
+
+    </item>
+    <item android:title="New Released">
+
+        <menu>
+            <item
+                android:id="@+id/last30day"
+                android:icon="@android:drawable/btn_star"
+                android:title="Last 30 days" />
+            <item
+                android:id="@+id/thisweek"
+                android:icon="@drawable/thisweek"
+                android:title="This week" />
+
+        </menu>
+
+    </item>
+
+    <item android:title="Browse">
+
+        <menu>
+            <item
+                android:id="@+id/action"
+                android:icon="@drawable/action"
+                android:title="Action" />
+            <item
+                android:id="@+id/shooter"
+                android:icon="@drawable/shooter"
+                android:title="Shooter" />
+            <item
+                android:id="@+id/fighting"
+                android:icon="@drawable/fighting"
+                android:title="Fighting" />
+            <item
+                android:id="@+id/adventure"
+                android:icon="@drawable/adventure"
+                android:title="Adventure" />
+            <item
+                android:id="@+id/horror"
+                android:icon="@drawable/scream"
+                android:title="Horror" />
+            <item
+                android:id="@+id/sport"
+                android:icon="@drawable/football"
+                android:title="Sports" />
+            <item
+                android:id="@+id/racing"
+                android:icon="@drawable/racing"
+                android:title="Racing" />
+            <item
+                android:id="@+id/simulation"
+                android:icon="@drawable/simulation"
+                android:title="Simulation" />
+            <item
+                android:id="@+id/puzzle"
+                android:icon="@drawable/puzzle"
+                android:title="Puzzle" />
+            <item
+                android:id="@+id/arcade"
+                android:icon="@drawable/arcade"
+                android:title="Arcade" />
+            <item
+                android:id="@+id/education"
+                android:icon="@drawable/education"
+                android:title="Educational" />
+            <item
+                android:id="@+id/cards"
+                android:icon="@drawable/cards"
+                android:title="Card" />
+            <item
+                android:id="@+id/rpg"
+                android:icon="@drawable/rpg"
+                android:title="RPG" />
+            <item
+                android:id="@+id/strategy"
+                android:icon="@drawable/strategy"
+                android:title="Strategy" />
+        </menu>
+
+    </item>
+
+
+    <item android:title="Communication">
+
+        <menu>
+
+            <item
+                android:id="@+id/contact"
+                android:icon="@android:drawable/stat_sys_phone_call"
+                android:title="Contact" />
+            <item
+                android:id="@+id/about"
+                android:icon="@android:drawable/ic_dialog_info"
+                android:title="About" />
+        </menu>
+
+    </item>
+
+
+
+
+
+
+
+</menu>
