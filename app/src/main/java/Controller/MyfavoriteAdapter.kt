@@ -1,15 +1,13 @@
 package Controller
 
+import BackendClass.Helper
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -20,6 +18,9 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
 class MyfavoriteAdapter (var mycontext : Context, private val userList : ArrayList<GamesFavorite>) : RecyclerView.Adapter<MyfavoriteAdapter.MyViewHolder>() {
+    var helper = Helper()
+
+
     override fun getItemCount(): Int {
        return userList.size
     }
@@ -38,7 +39,7 @@ class MyfavoriteAdapter (var mycontext : Context, private val userList : ArrayLi
         val GamenameMyfavorite : TextView = itemView.findViewById(R.id.GamenameMyfavorite)
         val rating_favorite : TextView = itemView.findViewById(R.id.rating_favorite)
         val imageviewOfgamemyfavorite : ImageView = itemView.findViewById(R.id.imageviewOfgamemyfavorite)
-        val deletefromdatabase: ImageButton = itemView.findViewById(R.id.deletefromdatabase)
+        val deletefromdatabase: CheckBox = itemView.findViewById(R.id.cb_checkhart)
         val constraintLayout1 : ConstraintLayout = itemView.findViewById(R.id.list_layout_favorite)
 
 
@@ -50,6 +51,7 @@ class MyfavoriteAdapter (var mycontext : Context, private val userList : ArrayLi
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+        helper.requestQueue = VolleySingleton.getmInstance(mycontext).requestQueue
 
         val game : GamesFavorite = userList[position]
         holder.GamenameMyfavorite.text = game.name
@@ -57,21 +59,16 @@ class MyfavoriteAdapter (var mycontext : Context, private val userList : ArrayLi
         Glide.with(mycontext).load(game.poster).into(holder.imageviewOfgamemyfavorite)
 
 
-       holder.deletefromdatabase.setOnClickListener {
-
+       holder.deletefromdatabase.setOnCheckedChangeListener{checkbox , ischecked->
 
 
            val myDatabase = FirebaseDatabase.getInstance().getReference("GamerFavorite")
            val user = FirebaseAuth.getInstance().currentUser
            val uid = user!!.uid
            val root : DatabaseReference = myDatabase.ref.child("$uid")
-
-
            root.child(game.ID.toString()).removeValue()
-          // deleteInfo(game)
            Toast.makeText(mycontext,"Item has been deleted successfully", Toast.LENGTH_LONG).show()
-
-        }
+       }
 
         holder.constraintLayout1.setOnClickListener(View.OnClickListener {
             val intent = Intent(mycontext, DetailGames::class.java)

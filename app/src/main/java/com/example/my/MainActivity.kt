@@ -87,14 +87,17 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
 
 
 
-        help.getDataFromUrl()
+            help.getDataFromUrl()
+
+
 
 //        hideItem()
-        swiperRefresh.setOnRefreshListener {
-            recyclerView.adapter!!.notifyDataSetChanged()
+       /* swiperRefresh.setOnRefreshListener {
+            help.getDataFromUrl()
+            //recyclerView.adapter!!.notifyDataSetChanged()
             swiperRefresh.isRefreshing = false
 
-        }
+        }*/
 
     }
 

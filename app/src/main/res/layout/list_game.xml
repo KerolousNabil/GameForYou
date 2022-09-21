@@ -74,15 +74,16 @@
                 app:layout_constraintTop_toBottomOf="@+id/imageviewOfgame"
                 app:srcCompat="@android:drawable/btn_star_big_on" />
 
-            <ImageView
-                android:id="@+id/save_card_to_database"
-                android:layout_width="44dp"
-                android:layout_height="38dp"
+            <CheckBox
+                android:id="@+id/cb_checkhart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:background="@android:color/transparent"
+                android:button="@drawable/selector_favorite_item"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_baseline_turned_in_not_24" />
+               />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

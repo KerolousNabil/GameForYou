@@ -1,15 +1,12 @@
 package View
 
 import BackendClass.Helper
-import Controller.Games
-import Controller.GamesFavorite
-import Controller.MyfavoriteAdapter
-import Controller.VolleySingleton
-import androidx.appcompat.app.AppCompatActivity
+import Controller.*
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.widget.SearchView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.RequestQueue
@@ -18,7 +15,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.content_main.*
 import java.util.*
-import kotlin.collections.ArrayList
 
 
 class MyfavoriteMenu : AppCompatActivity() {
@@ -28,10 +24,12 @@ class MyfavoriteMenu : AppCompatActivity() {
     private lateinit var dbref : DatabaseReference
     private lateinit var requestQueue: RequestQueue
 
-    private lateinit var game_favorite : ArrayList<GamesFavorite>
+    private lateinit var game_favorite : ArrayList<Games>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_myfavorite_menu)
+        this.intent.getBooleanExtra("checkBoxValue", false)
+
         if (supportActionBar != null) { supportActionBar!!.hide() }
         window.statusBarColor = this.resources.getColor(R.color.backgrounds)
         window.navigationBarColor = this.resources.getColor(R.color.backgrounds)
@@ -43,7 +41,9 @@ class MyfavoriteMenu : AppCompatActivity() {
         recyclerView = findViewById(R.id.recyclerview_favorite)
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = GridLayoutManager(this,2)
-        game_favorite = arrayListOf<GamesFavorite>()
+        game_favorite = arrayListOf<Games>()
+
+        help.Init(recyclerView , GamesAdapter(this@MyfavoriteMenu,game_favorite) , this@MyfavoriteMenu)
         getUserData()
 
     }
@@ -93,33 +93,45 @@ class MyfavoriteMenu : AppCompatActivity() {
     }
     private fun getUserData()
     {
+
+
         dbref = FirebaseDatabase.getInstance().getReference("GamerFavorite")
         val user = FirebaseAuth.getInstance().currentUser
         val uid = user!!.uid
         val email = user!!.email
         val root :DatabaseReference = dbref.ref.child("$uid")
-        root.addValueEventListener(object : ValueEventListener{
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()){
+
+        help.getFavorites_id {
+
+
+            root.get().addOnSuccessListener {
+                if (it.exists()) {
                     game_favorite.clear()
 
-                    for (userSnapshot in snapshot.children){
+                    for (userSnapshot in it.children) {
+                        if(userSnapshot.key != "favorites"){
+                            val game = userSnapshot.getValue(Games::class.java)
+                            Log.d("game", help.favorit_list.toString())
+                           if (help.favorit_list.contains(game!!.id_name))
+                            {
+                                game.fav_state = true
 
+                            }
+                            game_favorite.add(game!!)
+                        }
 
-                        val game = userSnapshot.getValue(GamesFavorite::class.java)
-                        game_favorite.add(game!!)
 
 
 
                     }
 
-                    recyclerView.adapter = MyfavoriteAdapter(this@MyfavoriteMenu,game_favorite)
-            }}
+                    recyclerView.adapter = GamesAdapter(this@MyfavoriteMenu, game_favorite)
 
-            override fun onCancelled(error: DatabaseError) {
+                }
+
+
             }
-
-        })
+        }
     }
 
 

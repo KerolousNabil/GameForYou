@@ -144,7 +144,7 @@ class DetailGames : AppCompatActivity() {
         sliderAdapter = SliderAdapter( this@DetailGames,imageUrl)
         sliderView.autoCycleDirection = SliderView.LAYOUT_DIRECTION_LTR
         sliderView.setSliderAdapter(sliderAdapter)
-        sliderView.scrollTimeInSec = 2
+        sliderView.scrollTimeInSec = 3
         sliderView.isAutoCycle = true
         sliderView.startAutoCycle()
 

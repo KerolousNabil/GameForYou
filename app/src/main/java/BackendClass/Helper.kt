@@ -4,11 +4,13 @@ import Controller.*
 import android.content.Context
 import android.util.Log
 import android.widget.Toast
-import androidx.browser.trusted.Token
 import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.toolbox.JsonObjectRequest
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
@@ -23,8 +25,17 @@ val genres_map = mutableMapOf<String,Int>(
 
 
 class Helper {
+
+    var value = mutableMapOf<String,String>()
+    val mydatabas = FirebaseDatabase.getInstance().getReference("GamerFavorite")
+    val user = FirebaseAuth.getInstance().currentUser
+    val email = user!!.email
+    val uid = user!!.uid
+    val root: DatabaseReference = mydatabas.ref.child("$uid")
     val gamelist: ArrayList<Games> = ArrayList()
     val platformlist: ArrayList<PlatformsData> = ArrayList()
+    var favorit_list = mutableListOf<String>()
+
 
     lateinit var requestQueue: RequestQueue
     lateinit var mycontext: Context
@@ -37,15 +48,33 @@ class Helper {
 
     fun Init ( recyclerView: RecyclerView,adaper: Any , mycontext:Context){
      this.mycontext = mycontext
-    this.recyclerView = recyclerView
-    this.adaper= adaper
+     this.recyclerView = recyclerView
+     this.adaper = adaper
+
+
 
         }
 
 
+    fun getFavorites_id(callback: () -> Unit){
+        root.child("favorites").get().addOnSuccessListener {
 
+            if (it.value !=null)
+            {
+                value = it.value as MutableMap<String, String>
+                Log.d("",value["id"]!!.split(",").toString())
+                favorit_list = value["id"]!!.split(",") as MutableList<String>
+            }
+            Log.d("helper", favorit_list.toString())
+
+            callback()
+
+        }
+    }
 
       fun commit_arguments(){
+
+
 
           url = basi_url
             if(this.myArguments["page"] == null){
@@ -58,111 +87,127 @@ class Helper {
           }
       }
       fun getDataFromUrl(){
-          val jsonObjctRequest = JsonObjectRequest(
-              Request.Method.GET, url, null,
-              { response ->
-                  for (i in 0 until response.getJSONArray("results").length()) {
-                      try {
-                          val results = response.getJSONArray("results")
-                          val detail  = results.getJSONObject(i)
-                          var backgroundimage = detail.getString("background_image")
-                          var rate = detail.getDouble("rating")
-                          val released = detail.getString("released")
-                          val updated = detail.getString("updated")
-                          val genres : JSONArray =  detail.getJSONArray("genres")
-                          val short_screenshots: JSONArray = detail.getJSONArray("short_screenshots")
-                          val id = detail.getInt("id")
+
+          this.getFavorites_id{
+              val jsonObjctRequest = JsonObjectRequest(
+                  Request.Method.GET, url, null,
+                  { response ->
+                      for (i in 0 until response.getJSONArray("results").length()) {
+                          try {
+                              val results = response.getJSONArray("results")
+                              val detail  = results.getJSONObject(i)
+                              var backgroundimage = detail.getString("background_image")
+                              var rate = detail.getDouble("rating")
+                              val released = detail.getString("released")
+                              val updated = detail.getString("updated")
+                              val genres : JSONArray =  detail.getJSONArray("genres")
+                              val short_screenshots: JSONArray = detail.getJSONArray("short_screenshots")
+                              val id = detail.getInt("id")
 
 
-                          val platforms: JSONArray = detail.getJSONArray("platforms")
-                          val stores:JSONArray = detail.getJSONArray("stores")
-                          val tags:JSONArray = detail.getJSONArray("tags")
+                              val platforms: JSONArray = detail.getJSONArray("platforms")
+                              val stores:JSONArray = detail.getJSONArray("stores")
+                              val tags:JSONArray = detail.getJSONArray("tags")
 
 
-                          var array_include_geners = arrayOf("")
-                          var array_include_nameplatform = arrayOf("")
-                          var array_include_screenshots = arrayOf("")
-                          var array_include_stores = arrayOf("")
-                          var array_include_tags = arrayOf("")
+                              var array_include_geners = arrayOf("")
+                              var array_include_nameplatform = arrayOf("")
+                              var array_include_screenshots = arrayOf("")
+                              var array_include_stores = arrayOf("")
+                              var array_include_tags = arrayOf("")
 
-                          for (loop_geners in 0 until genres.length())
-                          {
+                              for (loop_geners in 0 until genres.length())
+                              {
 
-                              array_include_geners+=genres.getJSONObject(loop_geners).getString("name")
+                                  array_include_geners+=genres.getJSONObject(loop_geners).getString("name")
+
+                              }
+
+                              for (loop_platforms in 0 until platforms.length())
+                              {
+                                  array_include_nameplatform+=platforms.getJSONObject(loop_platforms).getJSONObject("platform").getString("name")
+
+
+                              }
+
+                              for (loop_stores in 0 until stores.length())
+                              {
+                                  array_include_stores+= stores.getJSONObject(loop_stores).getJSONObject("store").getString("name")
+                              }
+
+
+                              for (loop_screenshoots in 0 until short_screenshots.length())
+                              {
+                                  array_include_screenshots+=short_screenshots.getJSONObject(loop_screenshoots).getString("image")
+
+
+                              }
+                              for (loop_tags in 0 until tags.length())
+                              {
+                                  array_include_tags+=tags.getJSONObject(loop_tags).getString("name")
+
+
+                              }
+                              var t3 = array_include_stores.contentToString().drop(2)
+                              t3= t3.dropLast(1)
+
+                              var t4 = array_include_tags.contentToString().drop(2)
+                              t4= t4.dropLast(1)
+
+                              var t = array_include_geners.contentToString().drop(2)
+                              t =t.dropLast(1)
+
+                              var t1 = array_include_nameplatform.contentToString().drop(2)
+                              t1 =t1.dropLast(1)
+
+                              var t2 =array_include_screenshots.contentToString().drop(2)
+                              t2 =t2.dropLast(1)
+
+
+                              val game = Games(id=null , detail.getString("name"),
+                                  t1, released, rate, t, backgroundimage,updated , t2  ,
+                                  t3 ,t4 , id.toString()
+                              )
+
+
+                              Log.d("favorites  " , favorit_list.toString())
+                              if (favorit_list.contains(game.id_name))
+                              {
+                                  game.fav_state = true
+
+                              }
+
+                              gamelist.add(game)
+
+
+                          } catch (e: JSONException) {
+                              e.printStackTrace()
+                          }
+
+
+
+
+                          if( myArguments["page"]!!.toInt() > 1){
+
+                              this.recyclerView.adapter!!.notifyDataSetChanged()
+
+                          }else{
+                              this.recyclerView.adapter = adaper as GamesAdapter
 
                           }
 
-                          for (loop_platforms in 0 until platforms.length())
-                          {
-                              array_include_nameplatform+=platforms.getJSONObject(loop_platforms).getJSONObject("platform").getString("name")
 
-
-                          }
-
-                        for (loop_stores in 0 until stores.length())
-                          {
-                            array_include_stores+= stores.getJSONObject(loop_stores).getJSONObject("store").getString("name")
-                          }
-
-
-                          for (loop_screenshoots in 0 until short_screenshots.length())
-                          {
-                              array_include_screenshots+=short_screenshots.getJSONObject(loop_screenshoots).getString("image")
-
-
-                          }
-                          for (loop_tags in 0 until tags.length())
-                          {
-                              array_include_tags+=tags.getJSONObject(loop_tags).getString("name")
-
-
-                          }
-                         var t3 = array_include_stores.contentToString().drop(2)
-                          t3= t3.dropLast(1)
-
-                          var t4 = array_include_tags.contentToString().drop(2)
-                          t4= t4.dropLast(1)
-
-                          var t = array_include_geners.contentToString().drop(2)
-                          t =t.dropLast(1)
-
-                          var t1 = array_include_nameplatform.contentToString().drop(2)
-                          t1 =t1.dropLast(1)
-
-                          var t2 =array_include_screenshots.contentToString().drop(2)
-                          t2 =t2.dropLast(1)
-
-
-                          val game = Games(id=null , detail.getString("name"),
-                              t1, released, rate, t, backgroundimage,updated , t2  ,
-                              t3 ,t4 , id.toString()
-                          )
-
-                          gamelist.add(game)
-
-
-                      } catch (e: JSONException) {
-                          e.printStackTrace()
                       }
-
-
-
-
-                      if( myArguments["page"]!!.toInt() > 1){
-
-                         this.recyclerView.adapter!!.notifyDataSetChanged()
-
-                      }else{
-                          this.recyclerView.adapter = adaper as GamesAdapter
-
-                      }
-
 
                   }
+              ) { error -> Toast.makeText(mycontext, "Please check Internet Connection and try again", Toast.LENGTH_LONG).show() }
+              requestQueue.add(jsonObjctRequest)
+              return@getFavorites_id
 
-              }
-          ) { error -> Toast.makeText(mycontext, "Please check Internet Connection and try again", Toast.LENGTH_LONG).show() }
-          requestQueue.add(jsonObjctRequest)
+          }
+
+
+
       }
 
 
