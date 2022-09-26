@@ -23,7 +23,6 @@ import com.example.my.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import org.json.JSONObject
-
 class GamesAdapter (var mycontext : Context, private var userList : ArrayList<Games>) : RecyclerView.Adapter<GamesAdapter.MyViewHolder>(){
     var helper = Helper()
     var value = mutableMapOf<String,String>()
@@ -34,9 +33,8 @@ class GamesAdapter (var mycontext : Context, private var userList : ArrayList<Ga
     val root: DatabaseReference = mydatabas.ref.child("$uid")
     var favorit_list = mutableListOf("")
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
+    init {
         root.child("favorites").get().addOnSuccessListener {
-
             if (it.value !=null)
             {
                 value = it.value as MutableMap<String, String>
@@ -48,6 +46,10 @@ class GamesAdapter (var mycontext : Context, private var userList : ArrayList<Ga
 
 
         }
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
+
 
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.list_game,parent , false)
         return MyViewHolder(itemView)
@@ -109,8 +111,8 @@ class GamesAdapter (var mycontext : Context, private var userList : ArrayList<Ga
 
           }
 
-              bundle.putString("min" , min)
-              bundle.putString("rec" , rec)
+          bundle.putString("min" , min)
+          bundle.putString("rec" , rec)
           bundle.putString("name",game.name)
           bundle.putString("link",res.getString("website"))
           bundle.putDouble("rating", game.rating!!)
@@ -129,9 +131,9 @@ class GamesAdapter (var mycontext : Context, private var userList : ArrayList<Ga
 
 
        })
-       holder.favorite.setOnCheckedChangeListener{checkbox , ischecked->
+       holder.favorite.setOnClickListener{
 
-           if (ischecked) {
+           if (holder.favorite.isChecked) {
 
 
                val mydatabas = FirebaseDatabase.getInstance().getReference("GamerFavorite")
@@ -147,7 +149,6 @@ class GamesAdapter (var mycontext : Context, private var userList : ArrayList<Ga
                    Toast.makeText(mycontext, "Added to Favorite List ", Toast.LENGTH_SHORT).show()
                 root.get().addOnSuccessListener {
 
-                    Log.d("a7a",it.child("favorites").toString())
                     if(it.child("favorites").value!=null)
                     {
                         value = it.child("favorites").value as MutableMap<String, String>
@@ -165,7 +166,7 @@ class GamesAdapter (var mycontext : Context, private var userList : ArrayList<Ga
 
                     }
                     root.child("favorites").setValue(value).addOnCompleteListener {
-                        Log.d("fav",root.child("favorites").toString())
+                        Toast.makeText(mycontext, "Added to Favorite List ", Toast.LENGTH_SHORT).show()
 
                     }
 
@@ -174,29 +175,6 @@ class GamesAdapter (var mycontext : Context, private var userList : ArrayList<Ga
 
                }
 
-            /*   root.child(Gameid.toString()).addValueEventListener(object : ValueEventListener {
-                   override fun onDataChange(snapshot: DataSnapshot) {
-                       if (snapshot.exists()){
-                           if (snapshot.child("favorites").value !=null)
-                           {
-                               value = snapshot.child("favorites").value as MutableMap<String, String>
-                               Log.d("",value.toString())
-                               value["id"]= value["id"].toString() + "," + game.id_name
-                           }
-                          else
-                           {
-                               value["id"] = game.id_name.toString()
-                           }
-
-                           root.child("favorites").setValue(value)
-
-
-                       }}
-
-                   override fun onCancelled(error: DatabaseError) {
-                   }
-
-               })*/
 
 
 
@@ -214,11 +192,6 @@ class GamesAdapter (var mycontext : Context, private var userList : ArrayList<Ga
                    .addOnSuccessListener {
                        helper.getFavorites_id {
                            Toast.makeText(mycontext,"Item has been deleted successfully", Toast.LENGTH_LONG).show()
-
-
-
-
-
 
                            if(helper.favorit_list.size <= 1 ){
 
@@ -240,26 +213,7 @@ class GamesAdapter (var mycontext : Context, private var userList : ArrayList<Ga
 
        }
 
-    /*   holder.favorite.setOnClickListener(){
-       //    if (holder.favorite.background.toString())
-           //if buttn is red
-                //delete from firebae
-           //else
-                //add to firebase
 
-           //notif adapter to change
-
-        /*   holder.favorite.setBackgroundResource(R.drawable.ic_baseline_turned_in_not_24)
-
-
-           Log.d("before color", holder.favorite.toString())
-           holder.favorite.setBackgroundResource(R.drawable.ic_baseline_turned_in_24)
-
-Log.d("after color", holder.favorite.imageTintList?.defaultColor.toString())*/
-
-
-
-       }*/
 
 
 
@@ -281,6 +235,9 @@ Log.d("after color", holder.favorite.imageTintList?.defaultColor.toString())*/
         val constraintLayout : ConstraintLayout = itemView.findViewById(R.id.list_layout)
         val card: CardView = itemView.findViewById(R.id.custom_cardview)
         val favorite:CheckBox = itemView.findViewById(R.id.cb_checkhart) as CheckBox
+
+
+
 
 
     }

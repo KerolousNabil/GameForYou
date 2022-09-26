@@ -96,12 +96,42 @@ class MyfavoriteMenu : AppCompatActivity() {
 
 
         dbref = FirebaseDatabase.getInstance().getReference("GamerFavorite")
+
         val user = FirebaseAuth.getInstance().currentUser
         val uid = user!!.uid
         val email = user!!.email
         val root :DatabaseReference = dbref.ref.child("$uid")
+       val favorite_listner = object  : ValueEventListener{
+           override fun onDataChange(snapshot: DataSnapshot) {
+               game_favorite.clear()
 
-        help.getFavorites_id {
+               for (userSnapshot in snapshot.children) {
+                   if(userSnapshot.key != "favorites"){
+                       val game = userSnapshot.getValue(Games::class.java)
+
+                           game!!.fav_state = true
+
+
+                       game_favorite.add(game!!)
+                   }
+
+
+               }
+
+               recyclerView.adapter = GamesAdapter(this@MyfavoriteMenu, game_favorite)
+
+           }
+
+
+
+           override fun onCancelled(error: DatabaseError) {
+
+
+           }
+
+       }
+        root.addValueEventListener(favorite_listner)
+      /*  help.getFavorites_id {
 
 
             root.get().addOnSuccessListener {
@@ -131,7 +161,7 @@ class MyfavoriteMenu : AppCompatActivity() {
 
 
             }
-        }
+        }*/
     }
 
 

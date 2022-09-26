@@ -6,6 +6,7 @@ import android.text.method.LinkMovementMethod
 import android.util.Log
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -87,6 +88,8 @@ class DetailGames : AppCompatActivity() {
         val linkk = bundle.getString("link")
        val minu = bundle.getString("min")
         val reco = bundle.getString("rec")
+
+
         savecomments.setOnClickListener {
 
             if (name!!.isNotEmpty())
@@ -94,16 +97,17 @@ class DetailGames : AppCompatActivity() {
 
                 val c = write_comment.text.toString()
                 val mydatabas = FirebaseDatabase.getInstance().getReference("Comments")
-
-
                 val user = FirebaseAuth.getInstance().currentUser
+                var udi = user!!.uid
                 val email = user!!.email
                 var CommentId = mydatabas.push().key
+                //make child game_id
 
-                val comment = Comments(CommentId,id.toString(),c,email)
-                mydatabas.child(CommentId.toString()).setValue(comment).addOnCompleteListener {
+                val comment = Comments(CommentId,id.toString(),c,email , udi)
+                mydatabas.child(udi).child(CommentId.toString()).setValue(comment).addOnCompleteListener {
                     Toast.makeText(this , "Comment added " , Toast.LENGTH_SHORT).show()
                 }
+                write_comment.text.clear()
 
             }
 
@@ -156,29 +160,33 @@ class DetailGames : AppCompatActivity() {
         dbref = FirebaseDatabase.getInstance().getReference("Comments")
         val user = FirebaseAuth.getInstance().currentUser
         val uid = user!!.uid
+
         dbref.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()){
                    commentdata.clear()
 
-                    for (userSnapshot in snapshot.children){
-                        val comment = userSnapshot.getValue(Comments::class.java)
+                    for (snapshote in snapshot.children)
+                    {
+                        for (userSnapshot in snapshote.children){
+                            val comment = userSnapshot.getValue(Comments::class.java)
                             var v =  comment!!.id_name
 
-                        if (intent.extras!!.getString("id") ==v.toString())
-                        {
+                            if (intent.extras!!.getString("id") ==v.toString())
+                            {
 
-                            comment!!.id_name
-                            commentdata.add(comment!!)
-                            Log.d("name", comment!!.id_name.toString())
+                                comment!!.id_name
+                                commentdata.add(comment!!)
+                                Log.d("name", comment!!.id_name.toString())
+
+                            }
+
+
 
                         }
-
-
-
-
-
                     }
+
+
 
                     recyclerView.adapter = CommentsAdapter(this@DetailGames,commentdata)
                 }}

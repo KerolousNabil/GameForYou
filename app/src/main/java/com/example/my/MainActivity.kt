@@ -39,9 +39,7 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
     private lateinit var requestQueue: RequestQueue
     private lateinit var ref: DatabaseReference
     var next:Int = 0
-    var gamelist: ArrayList<Games> = ArrayList()
 
-    //val adapter = GamesAdapter(this@MainActivity, gamelist )
     private lateinit var navigationview : NavigationView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -91,22 +89,15 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
 
 
 
-//        hideItem()
-       /* swiperRefresh.setOnRefreshListener {
+        swiperRefresh.setOnRefreshListener {
             help.getDataFromUrl()
-            //recyclerView.adapter!!.notifyDataSetChanged()
             swiperRefresh.isRefreshing = false
 
-        }*/
+        }
 
     }
 
 
-  /*  fun hideItem()
-    {
-        var nav_menu :Menu = navigationview.menu
-        nav_menu.findItem(R.id.appSearchBar).isVisible = false
-    }*/
 
 
 
@@ -144,29 +135,7 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
         return super.onCreateOptionsMenu(menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
-     /*   when(item.itemId)
-        {
-
-            R.id.home -> Toast.makeText(this,"Home......",Toast.LENGTH_SHORT).show()
-            R.id.last30day -> Toast.makeText(this,"last 30 day......",Toast.LENGTH_SHORT).show()
-            R.id.action -> Toast.makeText(this,"action......",Toast.LENGTH_SHORT).show()
-            R.id.adventure -> Toast.makeText(this,"adventure......",Toast.LENGTH_SHORT).show()
-            R.id.horror -> Toast.makeText(this,"horror......",Toast.LENGTH_SHORT).show()
-            R.id.sport -> Toast.makeText(this,"sport......",Toast.LENGTH_SHORT).show()
-            R.id.about -> Toast.makeText(this,"about......",Toast.LENGTH_SHORT).show()
-            R.id.contact -> Toast.makeText(this,"contact......",Toast.LENGTH_SHORT).show()
-
-
-
-
-        }*/
-
-
-
-        return super.onOptionsItemSelected(item)
-    }
 
     override fun onBackPressed() {
 
