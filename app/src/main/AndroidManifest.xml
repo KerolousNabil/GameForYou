@@ -23,14 +23,14 @@ tools:ignore="ExtraText">
     <activity
         android:name=".MainActivity"
         android:exported="false"
-        android:theme="@style/Theme.My.NoActionBar" />
+        android:theme="@style/Theme.My" />
     <activity
         android:name=".DetailGames"
         android:exported="false" />
     <activity
         android:name=".SplashScreen"
         android:exported="true"
-        android:theme="@style/Theme.My.NoActionBar">
+        android:theme="@style/Theme.My">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
 

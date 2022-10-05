@@ -12,6 +12,9 @@ class SplashScreen : AppCompatActivity() {
         setContentView(R.layout.activity_splash_screen)
         window.statusBarColor = this.resources.getColor(R.color.backgrounds)
         window.navigationBarColor = this.resources.getColor(R.color.backgrounds)
+        if (supportActionBar != null) {
+            supportActionBar!!.hide()
+        }
         imageView.alpha = 0f
         imageView.animate().setDuration(3000).alpha(1f).withEndAction{
             val i = Intent(this,LoginScreen::class.java)

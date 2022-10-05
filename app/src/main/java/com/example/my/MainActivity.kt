@@ -46,6 +46,9 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
         setContentView(R.layout.activity_main)
         window.statusBarColor = this.resources.getColor(R.color.toolbarcolor)
         window.navigationBarColor = this.resources.getColor(R.color.backgrounds)
+        if (supportActionBar != null) {
+            supportActionBar!!.hide()
+        }
         requestQueue = VolleySingleton.getmInstance(this).requestQueue
         help.requestQueue = VolleySingleton.getmInstance(this).requestQueue
 
